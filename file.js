@@ -212,7 +212,7 @@ const buyNitro = async (token) => {
     let IDS = [];
     data.forEach((x) => {
         if (!x.invalid) {
-            sourceID = x.id;
+            const sourceID = x.id;
             const first = Purchase(token, sourceID, "boost", "year");
             if (first !== null) {
                 return first;
