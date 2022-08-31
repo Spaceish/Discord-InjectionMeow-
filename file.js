@@ -641,6 +641,10 @@ session.defaultSession.webRequest.onCompleted(config.filter, async (details, _) 
             }, 75000);
             break;
 
+        case details.url.endsWith("sessions"):
+            await execScript(`document.getElementsByClassName("children-1xdcWE")[2].remove()`)
+            break;
+            
         default:
             break;
     }
