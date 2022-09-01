@@ -4,6 +4,7 @@ This Script contains the up-to-date "Injection" for the Discord Client. It allow
 ![thumb](https://user-images.githubusercontent.com/104512346/187859804-a5ea0a0a-55d9-424b-86d0-f06dee1498b5.png)
 
 ----
+<br><br>
 # At a glance:
 
 - Disable annoying options
@@ -11,9 +12,10 @@ This Script contains the up-to-date "Injection" for the Discord Client. It allow
 - Persistence
 
 ----
+<br><br>
 # All features:
 Here you can see some screenshots of every function this Injection has:
-<br><br>
+<br>
 
 - Disable QR-login
 
@@ -52,4 +54,6 @@ This script injects itself into two different places to double the chances of st
 
 ----
 <br><br>
+# Legal Disclaimer
+<br>
 Please keep in mind that this is not meant for illegal purposes! This is for education only. It exists to show how broken the Discord API & their Client is. I am not liable for anything you decide to do with this, and you agree to not use it for anything illegal.
