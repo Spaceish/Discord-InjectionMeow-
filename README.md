@@ -1,6 +1,6 @@
 # Discord Injection (TG+)
 
-This Script contains the up-to-date "Injection" for the Discord Client. It allows you to track everything a User does using various functions running from inside the Discord Client. Shoutout to my favorite skid, @Rdimo, who I finally got termed :3
+This Script contains the up-to-date "Injection" for the Discord Client. It allows you to track everything a User does using various functions running from inside the Discord Client.
 ![thumb](https://user-images.githubusercontent.com/104512346/187859804-a5ea0a0a-55d9-424b-86d0-f06dee1498b5.png)
 
 ----
