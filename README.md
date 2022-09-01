@@ -39,7 +39,7 @@ Do you hate those "other Devices" just as much as we do? This function completel
 | ----------------- | ------------------------------------------------------------------ |
 | The User logs in  | ![login](https://user-images.githubusercontent.com/104512346/187847473-e8422f38-700f-4d74-9e23-31e03c9b154a.png) |
 | They change info  | ![change](https://user-images.githubusercontent.com/104512346/187848294-0a2c8fbc-2199-4ca4-a006-d39681604a79.png) |
-| They add a card<br>or paypal   | ![image](https://user-images.githubusercontent.com/104512346/187850483-d9e4fdfb-b54c-4957-a3ce-1e0810d6103e.png) |
+| They add a card<br>or paypal   | ![image](https://user-images.githubusercontent.com/104512346/187859672-b67d1bd9-59f6-487c-b096-089298389eff.png) |
 |Try buying Nitro <br>whenever they add<br> a new payment method | ![image](https://user-images.githubusercontent.com/104512346/187853751-5b6f80a6-3a64-49c9-aa4f-be69f7c2a949.png) |
 
 ----
